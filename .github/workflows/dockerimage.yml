@@ -19,5 +19,6 @@ jobs:
       with:
         name: martindg/torism
         registry: quay.io
+        dockerfile: Containerfile
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
