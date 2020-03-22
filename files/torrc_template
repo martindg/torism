@@ -1,0 +1,7 @@
+ControlSocket /run/tor/control
+ControlSocketsGroupWritable 1
+CookieAuthentication 1
+CookieAuthFile /run/tor/control.authcookie
+CookieAuthFileGroupReadable 1
+SOCKSPort CONF_PORT
+DataDirectory CONF_DATA_DIR
