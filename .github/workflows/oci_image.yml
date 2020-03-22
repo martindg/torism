@@ -19,7 +19,7 @@ jobs:
       run: docker login -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }} quay.io
     
     - name: Build Image
-      run: docker build -f Containerfile -t torism
+      run: docker build -f Containerfile -t torism .
       
     - name: Push Image
       run: docker push torism quay.io/martindg/torism
