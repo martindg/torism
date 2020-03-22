@@ -2,10 +2,10 @@
 
 ## What is torism
 
-**torism** is an HTTP proxy that relays traffic through the TOR network. What is
-special about it is the fact that it keeps a number (specified through the
+**torism** is an HTTP proxy that relays traffic through the TOR network. What
+is special about it is the fact that it keeps a number (specified through the
 `NUM` environment variable) of TOR proxies running simultaneously. As a result,
-consecutive request will be routed through different TOR proxies.
+consecutive requests will be routed randomly through different TOR proxies.
 
 **torism** uses the following technologies:
 * TOR
