@@ -7,19 +7,16 @@ on:
     branches: [ master ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     
     - name: Registry Login
-      run: docker login -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }} quay.io
+      run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin quay.io
     
     - name: Build Image
-      run: docker build -f Containerfile -t torism .
+      run: docker build -f Containerfile -t quay.io/martindg/torism .
       
     - name: Push Image
-      run: docker push torism quay.io/martindg/torism
+      run: docker push quay.io/martindg/torism
