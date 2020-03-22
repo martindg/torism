@@ -1,3 +1,5 @@
+![OCI Image CI](https://github.com/martindg/torism/workflows/OCI%20Image%20CI/badge.svg)
+
 # torism
 
 ## What is torism
