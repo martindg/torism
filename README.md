@@ -1,4 +1,4 @@
-![OCI Image CI](https://github.com/martindg/torism/workflows/OCI%20Image%20CI/badge.svg)
+![OCI Image CI](https://github.com/martindg/torism/workflows/Build%20and%20Push%20Container%20Image/badge.svg)
 
 # torism
 
