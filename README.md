@@ -19,11 +19,11 @@ consecutive requests will be routed randomly through different TOR proxies.
 
 1. Run the container
 ```shell
-podman run --rm -it -e NUM=3 -p 9999:9999 quay.io/martindg/torism
+podman run --rm -it -e NUM=3 -p 9999:9999 ghcr.io/martindg/torism
 ```
 (or if you prefer Docker)
 ```shell
-docker run --rm -it -e NUM=3 -p 9999:9999 quay.io/martindg/torism
+docker run --rm -it -e NUM=3 -p 9999:9999 ghcr.io/martindg/torism
 ```
 
 2. Validate the connection
