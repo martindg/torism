@@ -17,16 +17,20 @@ consecutive requests will be routed randomly through different TOR proxies.
 
 ## How to use
 
+```shell
+SOCKS_PORT=9999
+```
+
 1. Run the container
 ```shell
-podman run --rm -it -e NUM=3 -p 9999:9999 ghcr.io/martindg/torism
+podman run --rm -it -e NUM=3 -p ${SOCKS_PORT}:9999 ghcr.io/martindg/torism
 ```
 (or if you prefer Docker)
 ```shell
-docker run --rm -it -e NUM=3 -p 9999:9999 ghcr.io/martindg/torism
+docker run --rm -it -e NUM=3 -p ${SOCKS_PORT}:9999 ghcr.io/martindg/torism
 ```
 
 2. Validate the connection
 ```shell
-curl -x socks://localhost:9000 https://check.torproject.org/api/ip
+curl -x socks://localhost:${SOCKS_PORT} https://check.torproject.org/api/ip
 ```
