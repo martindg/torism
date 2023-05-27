@@ -1,0 +1,5 @@
+[program:tor-_CONF_PORT_]
+user=nobody
+command=/usr/bin/tor -f _CONF_FILE_
+stdout_logfile=_CONF_DATA_DIR_/log
+stderr_logfile=_CONF_DATA_DIR_/log
