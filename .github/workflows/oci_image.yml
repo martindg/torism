@@ -1,22 +1,25 @@
-name: OCI Image CI
+name: Build and Push Container Image
 
 on:
   push:
-    branches: [ master ]
+    branches: [ ** ]
   pull_request:
     branches: [ master ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
     - uses: actions/checkout@v2
     
     - name: Registry Login
-      run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin quay.io
+      run: echo "${{secrets.GITHUB_TOKEN}}" | docker login -u ${{ github.actor }} --password-stdin ghcr.io
     
     - name: Build Image
-      run: docker build -f Containerfile -t quay.io/martindg/torism .
+      run: docker build -f Containerfile -t ghcr.io/martindg/torism .
       
     - name: Push Image
-      run: docker push quay.io/martindg/torism
+      run: docker push ghcr.io/martindg/torism
