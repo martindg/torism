@@ -28,5 +28,5 @@ docker run --rm -it -e NUM=3 -p 9999:9999 quay.io/martindg/torism
 
 2. Validate the connection
 ```shell
-curl ipinfo.io/json -x socks://localhost:9999
+curl -x socks://localhost:9000 https://check.torproject.org/api/ip
 ```
