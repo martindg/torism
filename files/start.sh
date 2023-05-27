@@ -5,6 +5,7 @@
 
 BEGIN_PORT=9050
 CONF_PROXYCHAINS="/tmp/proxychains.conf"
+CONF_HAPROXY="/tmp/haproxy.cfg"
 
 if test -z "${PROXY_PORT}"
 then
@@ -17,6 +18,10 @@ then
 	exit 1
 fi
 
+mkdir /run/tor
+chmod 700 /run/tor
+chown nobody:nobody /run/tor
+
 for i in $(seq "${NUM}")
 do
 	CONF_DATA_DIR=$(printf "/var/lib/tor%d" "${i}")
@@ -25,7 +30,7 @@ do
 
 	# create new tor data folder
 	cp -r /var/lib/tor "${CONF_DATA_DIR}"
-	chown toranon:toranon "${CONF_DATA_DIR}"
+	chown nobody:nobody "${CONF_DATA_DIR}"
 
 	# create new tor config file
 	cp /etc/tor/torrc_template "${CONF_FILE}"
@@ -34,10 +39,13 @@ do
 	sed "s:CONF_PORT:${CONF_PORT}:" -i "${CONF_FILE}"
 	sed "s:CONF_DATA_DIR:${CONF_DATA_DIR}:" -i "${CONF_FILE}"
 
-	runuser -c "tor -f ${CONF_FILE}" -s /bin/sh toranon >"${CONF_DATA_DIR}/log" 2>&1 &
+	su -s /bin/sh nobody -c "tor -f ${CONF_FILE}" >"${CONF_DATA_DIR}/log" 2>&1 &
 	printf "socks5 127.0.0.1 %s\n" "${CONF_PORT}" >> "${CONF_PROXYCHAINS}"
+	printf "\tserver tor-%s 127.0.0.1:%s\n" "${CONF_PORT}" "${CONF_PORT}" >> "${CONF_HAPROXY}"
 
 done
 
-cd "$(dirname ${CONF_PROXYCHAINS})" && \
-  runuser -c "proxychains4 nc --proxy-type http -l ${PROXY_PORT} -k" -s /bin/sh nobody
+haproxy -f "${CONF_HAPROXY}"
+
+#cd "$(dirname ${CONF_PROXYCHAINS})" && \
+#  su -s /bin/sh nobody -c "proxychains4 nc --proxy-type http -l ${PROXY_PORT} -k"
