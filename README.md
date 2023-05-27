@@ -12,7 +12,8 @@ consecutive requests will be routed randomly through different TOR proxies.
 **torism** uses the following technologies:
 * TOR
 * ncat
-* proxychains
+* proxychains (switched to haproxy)
+* haproxy
 
 ## How to use
 
@@ -27,5 +28,5 @@ docker run --rm -it -e NUM=3 -p 9999:9999 quay.io/martindg/torism
 
 2. Validate the connection
 ```shell
-curl ipinfo.io/json -x http://localhost:9999
+curl ipinfo.io/json -x socks://localhost:9999
 ```
