@@ -1,4 +1,4 @@
-# Change this to `docker` if you want to user Docker
+# Change this to `docker` if you want to use Docker
 RUNTIME=podman
 IMAGE_NAME=torism
 
