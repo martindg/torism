@@ -2,7 +2,7 @@ name: Build and Push Container Image
 
 on:
   push:
-    branches: [ ** ]
+    branches: [ test-workflow ]
   pull_request:
     branches: [ master ]
 
